@@ -4,6 +4,8 @@
   <div>
     <%= current_user.name %>
     <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+    <%= link_to "アカウント", "/users/show" %>
+    <%= link_to "プロフィール編集", "/users/edit" %>
     <%= link_to "施設登録", "/rooms/new" %>
   </div>
 <% else %>
