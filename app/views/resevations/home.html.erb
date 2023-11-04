@@ -1,16 +1,1 @@
 <p>トップページ</p>
-
-<% if user_signed_in? %>
-  <div>
-    <%= current_user.name %>
-    <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-    <%= link_to "アカウント", "/users/show" %>
-    <%= link_to "プロフィール編集", "/users/edit" %>
-    <%= link_to "施設登録", "/rooms/new" %>
-  </div>
-<% else %>
-  <div>
-    <%= link_to "ログイン", "/users/sign_in" %>
-    <%= link_to "新規登録", "/users/sign_up" %>
-  </div>
-<% end %>
