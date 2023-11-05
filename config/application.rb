@@ -20,3 +20,9 @@ module Reservationapp
     # config.eager_load_paths << Rails.root.join("extras")
   end
 end
+
+module HomestayMatching
+  class Application < Rails::Application
+    config.active_storage.variant_processor = :mini_magick
+  end
+end
