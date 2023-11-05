@@ -1,1 +1,11 @@
 <h2>Room</h2>
+
+<div class="form_area">
+<%= simple_form_for @room do |f| %>
+  <%= f.input :name %>
+  <%= f.input :introduction %>
+  <%= f.input :fee, placeholder: '半角数字で入力してください' %>
+  <%= f.input :address %>
+  <%= f.button :submit %>
+<% end %>
+</div>
