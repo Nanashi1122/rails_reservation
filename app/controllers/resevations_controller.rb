@@ -3,6 +3,7 @@ class ResevationsController < ApplicationController
     end
 
     def new
+        
         @resevation = Resevation.new 
     end
 end

@@ -37,7 +37,9 @@
   </div>
 
 <div class="field">
-  <%= f.label :avatar %>
+  <%= f.label :avatar %><br>
+  <p>現在のプロフィール画像<p>
+  <%= image_tag @user.avatar, width: 150 %>
   <%= f.file_field :avatar %>
 </div>
 

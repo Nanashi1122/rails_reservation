@@ -17,9 +17,9 @@
     <header>
       <% if user_signed_in? %>
         <nav class="navbar navbar-expand navbar-light bg-dark">
-          <a class="navbar-brand" href="#">Travel</a>
+          <a class="navbar-brand" href="/">Travel</a>
+          <%= image_tag current_user.avatar, width: 50 if current_user.avatar.attached? %>
           <div class="collapse navbar-collapse">
-            <%= image_tag current_user.gravatar_url %>
             <div class="dropdown">
               <button id="btnOpenMenu" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <%= current_user.name %>

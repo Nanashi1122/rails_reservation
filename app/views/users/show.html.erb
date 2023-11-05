@@ -1,11 +1,12 @@
-<h1>Account status</h1>
+<h1>アカウント情報</h1>
 
 <%= link_to "アカウント編集", "/users/edit" %>
 <h3>ユーザー名</h3>
-<%= @user.name %>
+<%= current_user.name %>
 <h3>メールアドレス</h3>
-<%= @user.email %>
+<%= current_user.email %>
 <h3>プロフィール</h3>
-<%= @user.profile %>
+<%= current_user.profile %>
 <h3>プロフィール画像</h3>
-<%= image_tag @user.avatar %>
+<%= image_tag current_user.avatar, width: 150 %><br>
+<%= link_to "トップページ", "/" %>
