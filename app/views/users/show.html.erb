@@ -1,6 +1,8 @@
 <h1>アカウント情報</h1>
 
 <%= link_to "アカウント編集", "/users/edit" %>
+<h3>ユーザーID</h3>
+<%= current_user.id %>
 <h3>ユーザー名</h3>
 <%= current_user.name %>
 <h3>メールアドレス</h3>
