@@ -10,12 +10,12 @@ class RoomsController < ApplicationController
     end
 
     def create
-        @room = Room.new(room_params)
+        @room = Room.new(params.require(:room).permit(:name, :introduction, :fee, :address, :room_image))
         @room.user_id = current_user.id
         if @room.save
             binding.pry
             flash[:notice] = "施設を新規登録しました"
-            redirect_to "rooms/index"
+            redirect_to action: "index"
         else
             flash[:notice] = "失敗"
             render :new

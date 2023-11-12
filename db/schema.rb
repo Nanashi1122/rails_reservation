@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 2023_11_11_172846) do
     t.string "introduction"
     t.integer "fee"
     t.string "address"
+    t.string "room_image"
   end
 
   create_table "users", force: :cascade do |t|

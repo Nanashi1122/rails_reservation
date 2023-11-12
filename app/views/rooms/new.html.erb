@@ -10,9 +10,7 @@
   <%= f.input :introduction %>
   <%= f.input :fee, placeholder: '半角数字で入力してください' %>
   <%= f.input :address %>
-  <%= f.label :post_image%>
-  <%= f.file_field :post_image%>
-  <%= f.hidden_field :user_id, value: current_user.id %>
+  <%= f.file_field :room_image %>
   <%= f.button :submit %>
 <% end %>
 </div>
