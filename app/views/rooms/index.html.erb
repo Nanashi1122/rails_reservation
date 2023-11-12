@@ -24,6 +24,8 @@
          <td><%= room.address %></td>
          <% if room.room_image.attached? %>
              <td><%= image_tag room.room_image %></td>
+         <% else %>
+             <td><%= image_tag 'default-room.png' %></td>
          <% end%>
        </tr>
      <% end %>
