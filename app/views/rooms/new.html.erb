@@ -1,5 +1,9 @@
 <h2>Room</h2>
 
+ <% if flash[:notice] %>
+   <p class="notice"><%= flash[:notice] %></p>
+ <% end %>
+
 <div class="form_area">
 <%= simple_form_for @room do |f| %>
   <%= f.input :name %>
@@ -8,6 +12,7 @@
   <%= f.input :address %>
   <%= f.label :post_image%>
   <%= f.file_field :post_image%>
+  <%= f.hidden_field :user_id, value: current_user.id %>
   <%= f.button :submit %>
 <% end %>
 </div>
