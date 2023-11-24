@@ -10,7 +10,7 @@ class RoomsController < ApplicationController
     end
 
     def create
-        @room = Room.new(params.require(:room).permit(:name, :introduction, :fee, :address, :room_image))
+        @room = Room.new(params.require(:room).permit(:name, :introduction, :fee, :address, :room_image, :area))
         @room.user_id = current_user.id
         if @room.save
             binding.pry
