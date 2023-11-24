@@ -15,7 +15,7 @@ class RoomsController < ApplicationController
         if @room.save
             binding.pry
             flash[:notice] = "施設を新規登録しました"
-            redirect_to action: "index"
+            redirect_to action: "show"
         else
             flash[:notice] = "失敗"
             render :new
@@ -23,6 +23,7 @@ class RoomsController < ApplicationController
     end
 
     def show
+        @rooms = Room.all
     end
   
     def edit
