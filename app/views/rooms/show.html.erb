@@ -1,42 +1,38 @@
- <h3>投稿一覧</h3>
+ <h3>施設詳細</h3>
  
  <table>
-   <thead>
      <tr>
-       <th>ID</th>
-       <th>ユーザーID</th>
-       <th>名前</th>
-       <th>紹介</th>
-       <th>金額</th>
-       <th>エリア</th>
-       <th>住所</th>
-       <th>画像</th>
-       <th>編集</th>
+        <th>名前</th>
+        <td><%= @room.name %></td>
      </tr>
-   </thead>
- 
-   <tbody>
-     <% @rooms.each do |room| %>
-       <% if room.user_id == current_user.id %>
-         <tr>
-           <td><%= room.id %></td>
-           <td><%= room.user_id %></td>
-           <td><%= room.name %></td>
-           <td><%= room.introduction %></td>
-           <td><%= room.fee %></td>
-           <td><%= room.area %></td>
-           <td><%= room.address %></td>
-           <% if room.room_image.attached? %>
-               <td><%= image_tag room.room_image %></td>
-           <% else %>
+     <tr>
+        <th>紹介</th>
+        <td><%= @room.introduction %></td>
+     </tr>
+     <tr>
+        <th>金額</th>
+        <td><%= @room.fee %></td>
+     </tr>
+     <tr>
+        <th>エリア</th>
+        <td><%= @room.address %></td>
+     </tr>
+     <tr>
+        <th>住所</th>
+        <td><%= @room.address %></td>
+     </tr>
+     <tr>
+        <th>画像</th>
+        <% if @room.room_image.attached? %>
+               <td><%= image_tag @room.room_image %></td>
+        <% else %>
                <td><%= image_tag 'default-room.png' %></td>
-           <% end%>
-           <td>
-                <%= link_to "編集",[:edit, room] %>        
-           </td>
-        
-         </tr>
-      <% end %>
-     <% end %>
-   </tbody>
+        <% end%>
+     </tr>
  </table>
+
+  <div>
+   <ul>
+     <li><%= link_to "施設一覧に戻る", :rooms %></li>
+   </ul>
+ </div>
