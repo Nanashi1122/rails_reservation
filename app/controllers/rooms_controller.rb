@@ -14,7 +14,7 @@ class RoomsController < ApplicationController
         @room.user_id = current_user.id
         if @room.save
             flash[:notice] = "施設を新規登録しました"
-            redirect_to action: "show"
+            redirect_to action: :show
         else
             flash[:notice] = "失敗"
             render :new
@@ -24,7 +24,8 @@ class RoomsController < ApplicationController
     def show
         @rooms = Room.all
     end 
-  
+
+
     def edit
         @room = Room.find(params[:id])
     end
