@@ -11,6 +11,7 @@
        <th>エリア</th>
        <th>住所</th>
        <th>画像</th>
+       <th>編集</th>
      </tr>
    </thead>
  
@@ -30,6 +31,10 @@
            <% else %>
                <td><%= image_tag 'default-room.png' %></td>
            <% end%>
+           <td>
+                <%= link_to "編集",[:edit, room] %>        
+           </td>
+        
          </tr>
       <% end %>
      <% end %>

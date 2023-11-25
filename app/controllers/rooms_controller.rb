@@ -4,7 +4,7 @@ class RoomsController < ApplicationController
         @rooms = Room.all
     end
 
-    def new
+    def new   
         @room = Room.new
         @rooms = Room.all
     end
@@ -13,7 +13,6 @@ class RoomsController < ApplicationController
         @room = Room.new(params.require(:room).permit(:name, :introduction, :fee, :address, :room_image, :area))
         @room.user_id = current_user.id
         if @room.save
-            binding.pry
             flash[:notice] = "施設を新規登録しました"
             redirect_to action: "show"
         else
@@ -24,12 +23,20 @@ class RoomsController < ApplicationController
 
     def show
         @rooms = Room.all
-    end
+    end 
   
     def edit
+        @room = Room.find(params[:id])
     end
   
     def update
+        @room = Room.find(params[:id])
+        if @room.update(params.require(:room).permit(:name, :introduction, :fee, :address, :room_image, :area))
+            flash[:notice] = "roomIDが「#{@room.id}」の施設情報を更新しました"
+            redirect_to action: "show"
+        else
+            render "edit"
+        end
     end
   
     def destroy
