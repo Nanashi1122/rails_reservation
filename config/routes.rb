@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get 'reservations/home'
   get 'reservations/show'
   get 'reservations/create'
+  get 'reservations/myreservation'
   get 'home/create'
   get "users/show"
   get "users/index"

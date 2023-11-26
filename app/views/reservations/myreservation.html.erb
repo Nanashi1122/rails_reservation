@@ -1,0 +1,29 @@
+ <h3>予約一覧</h3>
+ 
+ <table>
+   <thead>
+     <tr>
+       <th>ID</th>
+       <th>ユーザーID</th>
+       <th>施設ID</th>
+       <th>チェックイン日</th>
+       <th>チェックアウト日</th>
+       <th>宿泊人数</th>
+     </tr>
+   </thead>
+ 
+   <tbody>
+     <% @reservations.each do |reservation| %>
+       <% if reservation.user_id == current_user.id %>
+         <tr>
+           <td><%= reservation.id %></td>
+           <td><%= reservation.user_id %></td>
+           <td><%= reservation.room_id %></td>
+           <td><%= reservation.checkin %></td>
+           <td><%= reservation.checkout %></td>
+           <td><%= reservation.num_of_people %></td>
+         </tr>
+      <% end %>
+     <% end %>
+   </tbody>
+ </table>
