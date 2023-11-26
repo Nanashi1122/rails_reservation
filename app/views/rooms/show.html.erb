@@ -55,6 +55,12 @@
             <td><%= f.number_field :num_of_people %></td>
         </tr>
     </table>
+    <%= f.hidden_field :room_id, value: @room.id %>
+    <div>
+        <ul>
+            <li><%= f.submit "施設を予約する" %></li>
+        </ul>
+    </div>
  <% end %>
 
   <div>

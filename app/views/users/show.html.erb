@@ -10,5 +10,11 @@
 <h3>プロフィール</h3>
 <%= current_user.profile %>
 <h3>プロフィール画像</h3>
+<% if current_user.avatar.attached? %>
 <%= image_tag current_user.avatar, width: 150 %><br>
-<%= link_to "トップページ", "/" %>
+<% else %>
+<%= image_tag 'default-avatar.png' %>
+<% end %>
+<%= link_to "トップページ", root_path %>
+
+

@@ -39,7 +39,11 @@
 <div class="field">
   <%= f.label :avatar %><br>
   <p>現在のプロフィール画像<p>
-  <%= image_tag @user.avatar, width: 150 %>
+  <% if current_user.avatar.attached? %>
+    <%= image_tag current_user.avatar, width: 150 %><br>
+  <% else %>
+    <%= image_tag 'default-avatar.png' %>
+  <% end %>
   <%= f.file_field :avatar %>
 </div>
 

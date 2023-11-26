@@ -13,16 +13,18 @@ class RoomsController < ApplicationController
         @room = Room.new(params.require(:room).permit(:name, :introduction, :fee, :address, :room_image, :area))
         @room.user_id = current_user.id
         if @room.save
+            binding.pry
             flash[:notice] = "施設を新規登録しました"
-            redirect_to action: :show
+            redirect_to action: :myroom
         else
-            flash[:notice] = "失敗"
+            flash[:notice] = "施設の登録に失敗しました"
             render :new
         end
     end
 
     def show
-        @room = Room.find(params[:id])  
+        @room = Room.find(params[:id])
+        @reservation = Reservation.new
     end 
 
     def myroom
