@@ -1,11 +1,14 @@
 class UsersController < ApplicationController
+  def home
+  end
+
   def index
     @users = User.all
     @rooms = Room.all
   end
 
   def show
-    @usesrs = User.all
+    @users = User.all
   end
 
   def update

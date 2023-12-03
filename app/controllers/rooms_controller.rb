@@ -4,6 +4,11 @@ class RoomsController < ApplicationController
         @rooms = Room.all
     end
 
+    def search
+        @address_query = params[:address]
+        @rooms = Room.where('address LIKE ?', "%#{@address_query}%")
+    end
+
     def new   
         @room = Room.new
         @rooms = Room.all
@@ -13,7 +18,6 @@ class RoomsController < ApplicationController
         @room = Room.new(params.require(:room).permit(:name, :introduction, :fee, :address, :room_image, :area))
         @room.user_id = current_user.id
         if @room.save
-            binding.pry
             flash[:notice] = "施設を新規登録しました"
             redirect_to action: :myroom
         else

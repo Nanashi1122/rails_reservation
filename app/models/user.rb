@@ -10,5 +10,6 @@ class User < ApplicationRecord
   validates :avatar, content_type: { in: %w[image/jpeg image/gif image/png], message: "有効なフォーマットではありません", size: { less_than: 5.megabytes, message: "5MBを超える画像はアップロードできません" } }
   include Gravtastic
     gravtastic
-      
+
+    
 end

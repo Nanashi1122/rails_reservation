@@ -1,0 +1,46 @@
+<!-- app/views/rooms/search.html.erb -->
+<h1>施設検索</h1>
+  <p>Search results: <%= @rooms.count %> rooms found.</p>
+
+<%= form_with(url: search_rooms_path, method: 'get') do |form| %>
+  <%= form.label :address, 'Address:' %>
+  <%= form.text_field :address %>
+
+  <%= form.submit 'Search' %>
+<% end %>
+
+<table>
+    <thead>
+        <tr>
+        <th>ID</th>
+        <th>userID</th>
+        <th>名前</th>
+        <th>紹介</th>
+        <th>金額</th>
+        <th>エリア</th>
+        <th>住所</th>
+        <th>画像</th>
+        <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% @rooms.each do |room| %>
+        <tr>
+            <td><%= room.id %></td>
+            <td><%= room.user_id %></td>
+            <td><%= room.name %></td>
+            <td><%= room.introduction %></td>
+            <td><%= room.fee %></td>
+            <td><%= room.area %></td>
+            <td><%= room.address %></td>
+            <% if room.room_image.attached? %>
+                <td><%= image_tag room.room_image %></td>
+            <% else %>
+                <td><%= image_tag 'default-room.png' %></td>
+            <% end%>
+            <td><%= button_to "詳細はこちら", {action: "show"}, {method: :get, params: {id: room.id}} %></td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
