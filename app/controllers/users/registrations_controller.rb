@@ -15,9 +15,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # GET /resource/edit
-  # def edit
-  #   super
-  # end
+   def edit
+    @pageid = params[:pageid]
+    super
+   end
 
   # PUT /resource
   # def update
@@ -40,9 +41,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   protected
 
-  def update_resource(resource, params)
-    resource.update_without_password(params)
+  def after_update_path_for(resource)
+    users_show_path(current_user)
   end
+
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params
   #   devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute])
@@ -62,6 +64,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
-  before_create :default_image
+  
 
 end
