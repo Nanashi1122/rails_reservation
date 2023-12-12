@@ -1,36 +1,38 @@
- <h3>投稿一覧</h3>
+ <h3>登録施設一覧</h3>
  
  <table>
    <thead>
      <tr>
-       <th>ID</th>
-       <th>userID</th>
-       <th>名前</th>
-       <th>紹介</th>
-       <th>金額</th>
+       <th>施設名</th>
+       <th>施設紹介</th>
+       <th>宿泊金額(/日)</th>
        <th>エリア</th>
        <th>住所</th>
        <th>画像</th>
-       <th></th>
      </tr>
    </thead>
  
    <tbody>
      <% @rooms.each do |room| %>
        <tr>
-         <td><%= room.id %></td>
-         <td><%= room.user_id %></td>
-         <td><%= room.name %></td>
+         <td><%= link_to room.name, room_path(room) %></td>
          <td><%= room.introduction %></td>
          <td><%= room.fee %></td>
-         <td><%= room.area %></td>
+         <% if room.area == 1 %>
+           <td>東京</td>
+         <% elsif room.area == 2 %>
+           <td>大阪</td>
+         <% elsif room.area == 3 %>
+           <td>京都</td>
+         <% elsif room.area == 4 %>
+           <td>札幌</td>        
+         <% end %>
          <td><%= room.address %></td>
          <% if room.room_image.attached? %>
              <td><%= image_tag room.room_image %></td>
          <% else %>
              <td><%= image_tag 'default-room.png' %></td>
          <% end%>
-         <td><%= button_to "詳細はこちら", {action: "show"}, {method: :get, params: {id: room.id}} %></td>
        </tr>
      <% end %>
    </tbody>
