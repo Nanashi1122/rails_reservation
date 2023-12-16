@@ -8,6 +8,7 @@ class ReservationsController < ApplicationController
 
   def myreservation
     @reservations = Reservation.all
+    @reservations = Reservation.includes(:room).all
   end
 
   def create
