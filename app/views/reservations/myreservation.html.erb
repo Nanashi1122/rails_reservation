@@ -9,6 +9,7 @@
        <th>チェックイン日</th>
        <th>チェックアウト日</th>
        <th>予約確定日時</th>
+       <th>施設画像</th>
      </tr>
    </thead>
  
@@ -22,6 +23,11 @@
            <td><%= reservation.checkin %></td>
            <td><%= reservation.checkout %></td>
            <td><%= reservation.created_at.strftime("%Y/%m/%d %H:%M") %></td>
+           <% if reservation.room.room_image.attached? %>
+             <td><%= image_tag reservation.room.room_image %></td>
+         <% else %>
+             <td><%= image_tag 'default-room.png' %></td>
+         <% end%>
          </tr>
       <% end %>
      <% end %>
