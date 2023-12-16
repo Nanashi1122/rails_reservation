@@ -1,5 +1,5 @@
- <h3>施設詳細</h3>
- 
+<h3>施設詳細</h3>
+<body>
  <table>
      <tr>
         <th>施設名</th>
@@ -61,15 +61,44 @@
     </table>
     <%= f.hidden_field :room_id, value: @room.id %>
     <div>
-        <ul>
-            <li><%= f.submit "施設を予約する" %></li>
-        </ul>
-    </div>
- <% end %>
+    <ul>
+      <li>
+        <%= link_to "施設を予約する", "#", class: "btn btn-primary", data: { bs_toggle: "modal", bs_target: "#reservationModal" } %>
+      </li>
+    </ul>
+  </div>
 
+<div class="modal fade" id="reservationModal" tabindex="-1" aria-labelledby="reservationModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="reservationModalLabel">予約確認</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- 予約確認の内容を表示 -->
+        <p>チェックイン: <%= @reservation.checkin %></p>
+        <p>チェックアウト: <%= @reservation.checkout %></p>
+        <p>宿泊人数: <%= @reservation.num_of_people %></p>
+        <!-- 他の予約情報など -->
+
+        <p>施設名: <%= @room.name %></p>
+        <p>宿泊料金: <%= @room.fee %></p>
+        <!-- 他の施設情報など -->
+      </div>
+      <div class="modal-footer">
+        <!-- 予約を確定するボタン -->
+        <%= f.submit "予約確定", class: "btn btn-primary", data: { bs_toggle: "modal", bs_target: "#reservationModal", dismiss: "modal" } %>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
   <div>
    <ul>
      <li><%= link_to "施設一覧", :rooms %></li>
      <li><%= link_to "前のページに戻る", :back %></li>
    </ul>
  </div>
+</body>
