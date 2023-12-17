@@ -20,8 +20,8 @@
            <td><%= reservation.room.name %></td>
            <td><%= reservation.room.introduction %></td>
            <td><%= reservation.room.fee * reservation.num_of_people * reservation.total_nights %></td>
-           <td><%= reservation.checkin %></td>
-           <td><%= reservation.checkout %></td>
+           <td><%= reservation.checkin.strftime("%Y/%m/%d") %></td>
+           <td><%= reservation.checkout.strftime("%Y/%m/%d") %></td>
            <td><%= reservation.created_at.strftime("%Y/%m/%d %H:%M") %></td>
              <% if reservation.room.room_image.attached? %>
                <td><%= image_tag reservation.room.room_image %></td>
