@@ -1,14 +1,13 @@
 <!-- app/views/rooms/search.html.erb -->
 <h1>施設検索</h1>
-  <p>Search results: <%= @rooms.count %> rooms found.</p>
+  <p>検索結果: <%= @rooms.count %> 件見つかりました</p>
 
 <%= form_with(url: search_rooms_path, method: 'get') do |form| %>
-  <%= form.label :address, 'Address:' %>
-  <%= form.text_field :address %>
+  <%= form.label :address, '　　　　住所検索:' %>
+  <%= form.text_field :address %><br>
 
-  <%= form.label :name, 'Name:' %>
-  <%= form.text_field :name %>
-
+  <%= form.label :query, 'フリーワード検索:' %>
+  <%= form.text_field :query %>
 
   <%= form.submit 'Search' %>
 <% end %>
@@ -16,14 +15,12 @@
 <table>
     <thead>
         <tr>
-        <th>ID</th>
-        <th>userID</th>
         <th>名前</th>
         <th>紹介</th>
-        <th>金額</th>
+        <th>宿泊料金(/日)</th>
         <th>エリア</th>
         <th>住所</th>
-        <th>画像</th>
+        <th>施設画像</th>
         <th></th>
         </tr>
     </thead>
@@ -31,8 +28,6 @@
     <tbody>
         <% @rooms.each do |room| %>
         <tr>
-            <td><%= room.id %></td>
-            <td><%= room.user_id %></td>
             <td><%= room.name %></td>
             <td><%= room.introduction %></td>
             <td><%= room.fee %></td>
@@ -43,7 +38,7 @@
             <% else %>
                 <td><%= image_tag 'default-room.png' %></td>
             <% end%>
-            <td><%= button_to "詳細はこちら", {action: "show"}, {method: :get, params: {id: room.id}} %></td>
+            <td><%= button_to "詳細・予約はこちら", {action: "show"}, {method: :get, params: {id: room.id}} %></td>
         </tr>
         <% end %>
     </tbody>

@@ -5,16 +5,15 @@ class RoomsController < ApplicationController
     end
 
     def search
-        @searched = params[:address].present? || params[:name].present?
-        if params[:address].present? && params[:name].present?
-            @rooms = Room.where('address LIKE ? AND name LIKE ?', "%#{params[:address]}%", "%#{params[:name]}%")
-        elsif params[:address].present?
-            @rooms = Room.where('address LIKE ?', "%#{params[:address]}%")
-        elsif params[:name].present?
-            @rooms = Room.where('name LIKE ?', "%#{params[:name]}%")
-        else
-            @rooms = Room.all
-        end
+        @searched = params[:query].present? || params[:address].present?
+
+if params[:query].present?
+  @rooms = Room.where('name LIKE ? OR introduction LIKE ?', "%#{params[:query]}%", "%#{params[:query]}%")
+elsif params[:address].present?
+  @rooms = Room.where('address LIKE ?', "%#{params[:address]}%")
+else
+  @rooms = Room.all
+end
     end
 
     def new   

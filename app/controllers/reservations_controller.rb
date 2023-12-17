@@ -16,7 +16,7 @@ class ReservationsController < ApplicationController
     @reservation.user_id = current_user.id
     if @reservation.save
       flash[:notice] = "予定を確定しました"
-      redirect_to root_path
+      redirect_to action: :myreservation
     else
       flash[:notice] = "予定の確定に失敗しました"
       @rooms = Room.all
