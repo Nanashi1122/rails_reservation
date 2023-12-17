@@ -4,6 +4,7 @@
   document.addEventListener('DOMContentLoaded', function () {
     // モーダル表示ボタンにイベントリスナーを追加
     document.getElementById('openModalButton').addEventListener('click', function () {
+        
       // フォームの値を取得
       var fee = <%= @room.fee %>;
       var checkin = new Date(document.getElementById('reservation_checkin').value);
@@ -14,6 +15,10 @@
       var timeDiff = checkout - checkin;
       var daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
       var payAllFee = fee * daysDiff * numPeople;
+
+              if (!validateForm(checkin, checkout, numPeople)) {
+          return; // エラーがあれば処理を中断
+        }
 
       // モーダル内に値を表示
       document.getElementById('modalCheckin').innerText = checkin.toLocaleDateString();
@@ -27,6 +32,34 @@
       myModal.show();
     });
   });
+
+function validateForm(checkin, checkout, numPeople) {
+      var today = new Date(); // 本日の日付
+      var errorMessages = [];
+
+      // チェックインが本日より前か
+      if (checkin < today) {
+        errorMessages.push('チェックインは本日以降の日付を選択してください。');
+      }
+
+      // チェックアウトがチェックインより前か
+      if (checkout <= checkin) {
+        errorMessages.push('チェックアウトはチェックインより後の日付を選択してください。');
+      }
+
+      // 人数が０人以下か
+      if (numPeople <= 0) {
+        errorMessages.push('宿泊人数は1人以上を選択してください。');
+      }
+
+      // エラーメッセージがあれば表示
+      if (errorMessages.length > 0) {
+        alert(errorMessages.join('\n'));
+        return false;
+      }
+
+      return true; // エラーがなければtrueを返す
+    }
 </script>
 </head>
 <body>
