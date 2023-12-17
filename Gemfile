@@ -56,7 +56,6 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 gem 'bootstrap'
-gem 'bootstrap-sass'
 gem 'jquery-rails'
 gem 'simple_form'
 gem 'active_storage_validations'
