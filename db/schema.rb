@@ -54,12 +54,6 @@ ActiveRecord::Schema.define(version: 2023_11_26_150515) do
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "name"
-    t.string "introduction"
-    t.integer "fee"
-    t.string "address"
-    t.string "room_image"
-    t.integer "area"
   end
 
   create_table "users", force: :cascade do |t|
