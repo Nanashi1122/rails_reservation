@@ -31,7 +31,15 @@
             <td><%= room.name %></td>
             <td><%= room.introduction %></td>
             <td><%= room.fee %></td>
-            <td><%= room.area %></td>
+            <% if room.area == 1 %>
+                <td>東京</td>
+            <% elsif room.area == 2 %>
+                <td>大阪</td>
+            <% elsif room.area == 3 %>
+                <td>京都</td>
+            <% elsif room.area == 4 %>
+                <td>札幌</td>        
+            <% end %>
             <td><%= room.address %></td>
             <% if room.room_image.attached? %>
                 <td><%= image_tag room.room_image %></td>

@@ -30,7 +30,7 @@ ja:
         avatar: プロフィール画像
     models:
       user: ユーザー
-  devise: &devise
+  devise:
     confirmations:
       confirmed: メールアドレスが確認できました。
       new:
@@ -144,4 +144,3 @@ ja:
       not_saved:
         one: エラーが発生したため %{resource} は保存されませんでした。
         other: "%{count} 件のエラーが発生したため %{resource} は保存されませんでした。"
-  users: *devise

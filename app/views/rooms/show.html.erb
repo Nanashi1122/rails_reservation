@@ -1,165 +1,158 @@
 <h3>施設詳細</h3>
 <head>
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    // モーダル表示ボタンにイベントリスナーを追加
-    document.getElementById('openModalButton').addEventListener('click', function () {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('openModalButton').addEventListener('click', function () { 
+                var fee = <%= @room.fee %>;
+                var checkin = new Date(document.getElementById('reservation_checkin').value);
+                var checkout = new Date(document.getElementById('reservation_checkout').value);
+                var numPeople = document.getElementById('reservation_num_of_people').value;
+
+                var timeDiff = checkout - checkin;
+                var daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+                var payAllFee = fee * daysDiff * numPeople;
+
+                if (!validateForm(checkin, checkout, numPeople)) {
+                return;
+                }
+
+                document.getElementById('modalCheckin').innerText = checkin.toLocaleDateString();
+                document.getElementById('modalCheckout').innerText = checkout.toLocaleDateString();
+                document.getElementById('modalNumPeople').innerText = document.getElementById('reservation_num_of_people').value + "人";
+                document.getElementById('modalStayDuration').innerText = daysDiff + "日";
+                document.getElementById('modalPaymentAmount').innerText = payAllFee + "円";
         
-      // フォームの値を取得
-      var fee = <%= @room.fee %>;
-      var checkin = new Date(document.getElementById('reservation_checkin').value);
-      var checkout = new Date(document.getElementById('reservation_checkout').value);
-      var numPeople = document.getElementById('reservation_num_of_people').value;
+                var myModal = new bootstrap.Modal(document.getElementById('reservationModal'));
+                myModal.show();
+            });
+        });
 
-      // 宿泊日数を計算
-      var timeDiff = checkout - checkin;
-      var daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
-      var payAllFee = fee * daysDiff * numPeople;
+        function validateForm(checkin, checkout, numPeople) {
+            var today = new Date(); // 本日の日付
+            var errorMessages = [];
 
-              if (!validateForm(checkin, checkout, numPeople)) {
-          return; // エラーがあれば処理を中断
+            // チェックインが本日より前か
+            if (checkin < today) {
+            errorMessages.push('チェックインは本日以降の日付を選択してください。');
+            }
+
+            // チェックアウトがチェックインより前か
+            if (checkout <= checkin) {
+            errorMessages.push('チェックアウトはチェックインより後の日付を選択してください。');
+            }
+
+            // 人数が０人以下か
+            if (numPeople <= 0) {
+            errorMessages.push('宿泊人数は1人以上を選択してください。');
+            }
+
+            // エラーメッセージがあれば表示
+            if (errorMessages.length > 0) {
+            alert(errorMessages.join('\n'));
+            return false;
+            }
+
+            return true; // エラーがなければtrueを返す
         }
-
-      // モーダル内に値を表示
-      document.getElementById('modalCheckin').innerText = checkin.toLocaleDateString();
-      document.getElementById('modalCheckout').innerText = checkout.toLocaleDateString();
-      document.getElementById('modalNumPeople').innerText = document.getElementById('reservation_num_of_people').value;
-      document.getElementById('modalStayDuration').innerText = daysDiff + "日";
-      document.getElementById('modalPaymentAmount').innerText = payAllFee + "円";
-
-      // モーダルを表示
-      var myModal = new bootstrap.Modal(document.getElementById('reservationModal'));
-      myModal.show();
-    });
-  });
-
-function validateForm(checkin, checkout, numPeople) {
-      var today = new Date(); // 本日の日付
-      var errorMessages = [];
-
-      // チェックインが本日より前か
-      if (checkin < today) {
-        errorMessages.push('チェックインは本日以降の日付を選択してください。');
-      }
-
-      // チェックアウトがチェックインより前か
-      if (checkout <= checkin) {
-        errorMessages.push('チェックアウトはチェックインより後の日付を選択してください。');
-      }
-
-      // 人数が０人以下か
-      if (numPeople <= 0) {
-        errorMessages.push('宿泊人数は1人以上を選択してください。');
-      }
-
-      // エラーメッセージがあれば表示
-      if (errorMessages.length > 0) {
-        alert(errorMessages.join('\n'));
-        return false;
-      }
-
-      return true; // エラーがなければtrueを返す
-    }
-</script>
+    </script>
 </head>
 <body>
- <table>
-     <tr>
-        <th>施設名</th>
-        <td><%= @room.name %></td>
-     </tr>
-     <tr>
-        <th>施設紹介</th>
-        <td><%= @room.introduction %></td>
-     </tr>
-     <tr>
-        <th>宿泊料金(/日)</th>
-        <td><%= @room.fee %></td>
-     </tr>
-     <tr>
-        <th>エリア</th>
-        <% if @room.area == 1 %>
-            <td>東京</td>
-        <% elsif @room.area == 2 %>
-            <td>大阪</td>
-        <% elsif @room.area == 3 %>
-            <td>京都</td>
-        <% elsif @room.area == 4 %>
-            <td>札幌</td>        
-        <% end %>
-     </tr>
-     <tr>
-        <th>住所</th>
-        <td><%= @room.address %></td>
-     </tr>
-     <tr>
-        <th>施設画像</th>
-        <% if @room.room_image.attached? %>
-               <td><%= image_tag @room.room_image %></td>
-        <% else %>
-               <td><%= image_tag 'default-room.png' %></td>
-        <% end%>
-     </tr>
-     <tr>
-        <th>作成日</th>
-        <td><%= @room.created_at.strftime("%Y/%m/%d") %></td>
-     </tr>
- </table>
- <%= form_with model: @reservation do |f| %>
     <table>
         <tr>
-            <th><%= f.label :checkin, "チェックイン" %></th>
-            <td><%= f.date_field :checkin, id: 'reservation_checkin' %></td>
+            <th>施設名</th>
+            <td><%= @room.name %></td>
         </tr>
-    
         <tr>
-            <th><%= f.label :checkout, "チェックアウト" %></th>
-            <td><%= f.date_field :checkout, id: 'reservation_checkout' %></td>
+            <th>施設紹介</th>
+            <td><%= @room.introduction %></td>
         </tr>
-
         <tr>
-            <th><%= f.label :num_of_people, "宿泊人数" %></th>
-            <td><%= f.number_field :num_of_people, id: 'reservation_num_of_people' %></td>
+            <th>宿泊料金(/日)</th>
+            <td><%= @room.fee %></td>
+        </tr>
+        <tr>
+            <th>エリア</th>
+            <% if @room.area == 1 %>
+                <td>東京</td>
+            <% elsif @room.area == 2 %>
+                <td>大阪</td>
+            <% elsif @room.area == 3 %>
+                <td>京都</td>
+            <% elsif @room.area == 4 %>
+                <td>札幌</td>        
+            <% end %>
+        </tr>
+        <tr>
+            <th>住所</th>
+            <td><%= @room.address %></td>
+        </tr>
+        <tr>
+            <th>施設画像</th>
+            <% if @room.room_image.attached? %>
+                    <td><%= image_tag @room.room_image %></td>
+            <% else %>
+                    <td><%= image_tag 'default-room.png' %></td>
+            <% end%>
+        </tr>
+        <tr>
+            <th>作成日</th>
+            <td><%= (@room.created_at + 9.hours).strftime("%Y/%m/%d") %></td>
         </tr>
     </table>
-    <%= f.hidden_field :room_id, value: @room.id %>
+    <%= form_with model: @reservation do |f| %>
+        <table>
+            <tr>
+                <th><%= f.label :checkin, "チェックイン" %></th>
+                <td><%= f.date_field :checkin, id: 'reservation_checkin' %></td>
+            </tr>
+        
+            <tr>
+                <th><%= f.label :checkout, "チェックアウト" %></th>
+                <td><%= f.date_field :checkout, id: 'reservation_checkout' %></td>
+            </tr>
+
+            <tr>
+                <th><%= f.label :num_of_people, "宿泊人数" %></th>
+                <td><%= f.number_field :num_of_people, id: 'reservation_num_of_people' %></td>
+            </tr>
+        </table>
+
+        <%= f.hidden_field :room_id, value: @room.id %>
+        
+        <div>
+            <ul>
+                <li>
+                    <%= link_to "施設を予約する", "#", class: "btn btn-primary", id: "openModalButton" %>
+                </li>
+            </ul>
+        </div>
+
+        <div class="modal fade" id="reservationModal" tabindex="-1" aria-labelledby="reservationModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="reservationModalLabel">予約確認</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>チェックイン: <span id="modalCheckin"></span></p>
+                        <p>チェックアウト: <span id="modalCheckout"></span></p>
+                        <p>宿泊日数: <span id="modalStayDuration"></span></p>
+                        <p>宿泊人数: <span id="modalNumPeople"></span></p>
+                        <p>合計金額: <span id="modalPaymentAmount"></span></p>
+                    </div>
+                    <div class="modal-footer">
+                        <%= f.submit "予約確定", class: "btn btn-primary", data: { bs_toggle: "modal", bs_target: "#reservationModal", dismiss: "modal" } %>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% end %>
     <div>
-    <ul>
-      <li>
-        <%= link_to "施設を予約する", "#", class: "btn btn-primary", id: "openModalButton" %>
-      </li>
-    </ul>
-  </div>
-
-  <div class="modal fade" id="reservationModal" tabindex="-1" aria-labelledby="reservationModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="reservationModalLabel">予約確認</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <!-- 予約確認の内容を表示 -->
-          <p>チェックイン: <span id="modalCheckin"></span></p>
-          <p>チェックアウト: <span id="modalCheckout"></span></p>
-          <p>宿泊日数: <span id="modalStayDuration"></span></p>
-          <p>宿泊人数: <span id="modalNumPeople"></span></p>
-          <p>合計金額: <span id="modalPaymentAmount"></span></p>
-        </div>
-        <div class="modal-footer">
-          <%= f.submit "予約確定", class: "btn btn-primary", data: { bs_toggle: "modal", bs_target: "#reservationModal", dismiss: "modal" } %>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
-        </div>
-      </div>
+        <ul>
+            <li><%= link_to "施設一覧", :rooms %></li>
+              <li><%= link_to "前のページに戻る", :back %></li>
+        </ul>
     </div>
-  </div>
-<% end %>
-  <div>
-   <ul>
-     <li><%= link_to "施設一覧", :rooms %></li>
-     <li><%= link_to "前のページに戻る", :back %></li>
-   </ul>
- </div>
-
-
 </body>

@@ -4,7 +4,7 @@
 //= require bootstrap
 //= require_tree .
 
-import 'bootstra;';
+import 'bootstrap';
 import 'bootstrap/dist/js/bootstrap';
 import 'bootstrap/dist/css/bootstrap';
 
