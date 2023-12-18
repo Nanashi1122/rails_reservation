@@ -1,7 +1,8 @@
 <h1>施設検索</h1>
-  <p>検索結果: <%= @rooms.count %> 件見つかりました</p>
-
+<p>検索結果: <%= @rooms.count %> 件見つかりました</p>
 <%= form_with(url: search_rooms_path, method: 'get') do |form| %>
+  <%= form.hidden_field :address, value: @default_query %>
+  
   <%= form.label :address, '　　　　住所検索:' %>
   <%= form.text_field :address %><br>
 
@@ -17,7 +18,6 @@
         <th>名前</th>
         <th>紹介</th>
         <th>宿泊料金(/日)</th>
-        <th>エリア</th>
         <th>住所</th>
         <th>施設画像</th>
         <th></th>
@@ -30,15 +30,6 @@
             <td><%= room.name %></td>
             <td><%= room.introduction %></td>
             <td><%= room.fee %></td>
-            <% if room.area == 1 %>
-                <td>東京</td>
-            <% elsif room.area == 2 %>
-                <td>大阪</td>
-            <% elsif room.area == 3 %>
-                <td>京都</td>
-            <% elsif room.area == 4 %>
-                <td>札幌</td>        
-            <% end %>
             <td><%= room.address %></td>
             <% if room.room_image.attached? %>
                 <td><%= image_tag room.room_image %></td>

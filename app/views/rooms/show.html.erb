@@ -71,18 +71,6 @@
             <td><%= @room.fee %></td>
         </tr>
         <tr>
-            <th>エリア</th>
-            <% if @room.area == 1 %>
-                <td>東京</td>
-            <% elsif @room.area == 2 %>
-                <td>大阪</td>
-            <% elsif @room.area == 3 %>
-                <td>京都</td>
-            <% elsif @room.area == 4 %>
-                <td>札幌</td>        
-            <% end %>
-        </tr>
-        <tr>
             <th>住所</th>
             <td><%= @room.address %></td>
         </tr>

@@ -6,7 +6,6 @@
       <th>施設名</th>
       <th>施設紹介</th>
       <th>宿泊金額(/日)</th>
-      <th>エリア</th>
       <th>住所</th>
       <th>画像</th>
     </tr>
@@ -18,15 +17,6 @@
         <td><%= link_to room.name, room_path(room) %></td>
         <td><%= room.introduction %></td>
         <td><%= room.fee %></td>
-        <% if room.area == 1 %>
-          <td>東京</td>
-        <% elsif room.area == 2 %>
-          <td>大阪</td>
-        <% elsif room.area == 3 %>
-          <td>京都</td>
-        <% elsif room.area == 4 %>
-          <td>札幌</td>        
-        <% end %>
         <td><%= room.address %></td>
         <% if room.room_image.attached? %>
           <td><%= image_tag room.room_image %></td>
