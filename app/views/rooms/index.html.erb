@@ -19,9 +19,9 @@
         <td><%= room.fee %></td>
         <td><%= room.address %></td>
         <% if room.room_image.attached? %>
-          <td><%= image_tag room.room_image %></td>
+          <td><%= image_tag room.room_image, size: '500x300' %></td>
         <% else %>
-          <td><%= image_tag 'default-room.png' %></td>
+          <td><%= image_tag 'default-room.png', size: '500x300' %></td>
         <% end%>
       </tr>
     <% end %>

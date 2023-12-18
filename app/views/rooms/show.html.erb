@@ -77,18 +77,18 @@
         <tr>
             <th>施設画像</th>
             <% if @room.room_image.attached? %>
-                    <td><%= image_tag @room.room_image %></td>
+                    <td><%= image_tag @room.room_image, size: '500x300' %></td>
             <% else %>
-                    <td><%= image_tag 'default-room.png' %></td>
+                    <td><%= image_tag 'default-room.png', size: '500x300' %></td>
             <% end%>
         </tr>
         <tr>
             <th>作成日</th>
             <td><%= (@room.created_at + 9.hours).strftime("%Y/%m/%d") %></td>
         </tr>
-    </table>
-    <%= form_with model: @reservation do |f| %>
-        <table>
+
+        <%= form_with model: @reservation do |f| %>
+
             <tr>
                 <th><%= f.label :checkin, "チェックイン" %></th>
                 <td><%= f.date_field :checkin, id: 'reservation_checkin' %></td>
@@ -103,7 +103,7 @@
                 <th><%= f.label :num_of_people, "宿泊人数" %></th>
                 <td><%= f.number_field :num_of_people, id: 'reservation_num_of_people' %></td>
             </tr>
-        </table>
+    </table>
 
         <%= f.hidden_field :room_id, value: @room.id %>
         
