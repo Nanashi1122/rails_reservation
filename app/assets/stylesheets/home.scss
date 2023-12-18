@@ -1,3 +1,41 @@
-// Place all the styles related to the home controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+.TopContainer{
+    background-image: asset-url('cover-lg.jpg');
+    background-size: cover;
+    background-position: 50%;
+    height: 750px;
+    padding-top: 350px;
+    width: 100%;
+}
+
+
+.SearchInputArea{
+    text-align: center;
+}
+
+.SearchInputArea form {
+    margin: 0 auto; /* 水平方向に中央に配置 */
+    width: 60%; /* 必要に応じて最大幅を指定 */
+}
+
+.SearchInputArea table {
+    width: 100%;
+    height: 200px;
+}
+.SearchInputArea td{
+    background-color: rgba( 255, 255, 255, 0.45 );
+}
+
+.SearchInputArea form input[type="text"] {
+    font-size: 25px;
+    padding: 12px;
+    width: 100%;
+}
+
+.SearchInputArea form input[type="submit"] {
+    font-size: 25px;
+    padding: 12px;
+    width: 100%;
+    border-radius: 10px;
+    color: white;
+    background-color: darkorange;
+}
