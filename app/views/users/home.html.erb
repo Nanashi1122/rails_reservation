@@ -1,7 +1,20 @@
 <p>おすすめエリア</p>
+<body>
+    <div class="TopContainer">
+        <div class="SearchInputArea">
+            <%= form_with( url: search_rooms_path, method: 'get') do |f| %>
+                <td><%= f.text_field :address %></td>
+
+                <%= f.submit '住所検索' %>
+            <% end %>
+        </div>
+    </div>
+
 
 
 <%= link_to '東京', search_rooms_path(default_query: '東京都') %>
 <%= link_to '大阪', search_rooms_path(default_query: '大阪府') %>
 <%= link_to '京都', search_rooms_path(default_query: '京都府') %>
 <%= link_to '札幌', search_rooms_path(default_query: '札幌市') %>
+
+</body>
