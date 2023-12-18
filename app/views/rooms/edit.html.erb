@@ -24,6 +24,20 @@
         <th><%= f.label :address ,"住所" %></th>
         <td><%= f.text_area :address %></td>
       </tr>
+      <tr>
+        <th><p>現在の登録画像</p></th><br>
+        <% if @room.room_image.attached? %>
+          <td>
+            <%= image_tag @room.room_image, size: '500x300' %>
+          </td>
+        <% else %>
+          <td colspan="2">画像は登録されていません</td>
+        <% end%>
+      </tr>
+      <tr>
+        <th><%= f.label :room_image ,"施設画像" %></th>
+        <td><%= f.file_field :room_image %></td>
+      </tr>
     </table>
   
     <div>
