@@ -1,0 +1,52 @@
+
+<head>
+<%= stylesheet_link_tag 'home', media: 'all' %>
+</head>
+<body>
+    <div class="TopContainer">
+        <div class="SearchInputArea">
+            <%= form_with( url: search_rooms_path, method: 'get') do |f| %>
+                <table>
+                    <tr>
+                        <td><%= f.text_field :address, placeholder: '住所を入力' %></td>
+                    </tr>
+                    <tr>
+                        <td><%= f.submit '検索' %></td>
+                    </tr>
+                </table>
+            <% end %>
+        </div>
+    </div>
+
+
+<p class="SelectArea">おすすめエリア</p>
+<div class="RecommendArea">
+    <div class="LinkContainer">
+    <%= link_to(search_rooms_path(default_query: '東京都')) do %>
+        <img src="<%= asset_path('tokyo.jpg') %>" alt="東京">
+        <span>東京</span>
+    <% end %>
+    </div>
+
+    <div class="LinkContainer">
+    <%= link_to(search_rooms_path(default_query: '大阪府')) do %>
+        <img src="<%= asset_path('osaka.jpg') %>" alt="大阪">
+        <span>大阪</span>
+    <% end %>
+    </div>
+
+        <div class="LinkContainer">
+    <%= link_to(search_rooms_path(default_query: '京都府')) do %>
+        <img src="<%= asset_path('kyoto.jpg') %>" alt="京都">
+        <span>京都</span>
+    <% end %>
+    </div>
+
+        <div class="LinkContainer">
+    <%= link_to(search_rooms_path(default_query: '札幌市')) do %>
+        <img src="<%= asset_path('sapporo.jpg') %>" alt="札幌">
+        <span>札幌</span>
+    <% end %>
+    </div>
+</div>
+</body>

@@ -1,0 +1,82 @@
+.TopContainer{
+    background-image: asset-url('cover-lg.jpg');
+    background-size: cover;
+    background-position: 50%;
+    height: 750px;
+    padding-top: 500px;
+    width: 100%;
+}
+
+
+.SearchInputArea{
+    text-align: center;
+}
+
+.SearchInputArea form {
+    margin: 0 auto;
+    width: 60%;
+}
+
+.SearchInputArea table {
+    width: 100%;
+    height: 200px;
+}
+.SearchInputArea td{
+    background-color: rgba( 255, 255, 255, 0.45 );
+}
+
+.SearchInputArea form input[type="text"] {
+    font-size: 25px;
+    padding: 12px;
+    width: 100%;
+}
+
+.SearchInputArea form input[type="submit"] {
+    font-size: 25px;
+    padding: 12px;
+    width: 100%;
+    border-radius: 10px;
+    color: white;
+    background-color: darkorange;
+}
+
+.SelectArea{
+    font-size: 40px;
+    border-bottom: 3px solid darkgray;
+    width: fit-content;
+    margin-top: 50px;
+}
+
+.RecommendArea {
+    display: flex; 
+    width:100%
+}
+  
+.LinkContainer {
+    flex: 1 0 20%;
+    margin: 0 10px;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+}
+.LinkContainer img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+}
+
+.LinkContainer a {
+    text-decoration: none;
+}
+
+.LinkContainer a span {
+    position: absolute;
+    top: 10%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 32px;
+    text-shadow: -1px -1px 1px black, 1px -1px 1px black, -1px 1px 1px black, 1px 1px 1px black;
+}
