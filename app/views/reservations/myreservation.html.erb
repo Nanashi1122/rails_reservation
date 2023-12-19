@@ -24,9 +24,9 @@
           <td><%= reservation.checkout.strftime("%Y/%m/%d") %></td>
           <td><%= (reservation.created_at + 9.hours).strftime("%Y/%m/%d %H:%M") %></td>
             <% if reservation.room.room_image.attached? %>
-              <td><%= image_tag reservation.room.room_image %></td>
+              <td><%= image_tag reservation.room.room_image, size: '500x300' %></td>
             <% else %>
-              <td><%= image_tag 'default-room.png' %></td>
+              <td><%= image_tag 'default-room.png', size: '500x300' %></td>
             <% end%>
         </tr>
     <% end %>
